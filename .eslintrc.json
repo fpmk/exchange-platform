@@ -1,0 +1,80 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nx"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@nx/typescript"
+      ],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "type:core",
+                "onlyDependOnLibsWithTags": [
+                  "type:core"
+                ]
+              },
+              {
+                "sourceTag": "type:domain",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:domain"
+                ]
+              },
+              {
+                "sourceTag": "type:application",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:domain",
+                  "type:application"
+                ]
+              },
+              {
+                "sourceTag": "type:infrastructure",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:domain",
+                  "type:infrastructure"
+                ]
+              },
+              {
+                "sourceTag": "type:widgets",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:application",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:components",
+                "onlyDependOnLibsWithTags": [
+                  "type:widgets",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": [
+                  "type:util"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

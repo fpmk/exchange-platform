@@ -1,0 +1,21 @@
+{
+  "name": "chart",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/widgets/chart/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:chart scope:market"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ui/widgets/chart/jest.config.ts",
+        "tsConfig": "libs/ui/widgets/chart/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

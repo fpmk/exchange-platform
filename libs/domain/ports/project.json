@@ -1,0 +1,21 @@
+{
+  "name": "ports",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/ports/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:core scope:shared"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/domain/ports/jest.config.ts",
+        "tsConfig": "libs/domain/ports/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

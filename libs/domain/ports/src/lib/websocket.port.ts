@@ -1,0 +1,28 @@
+import { Observable } from 'rxjs';
+
+export type ConnectionStatus =
+  | 'connected'
+  | 'disconnected'
+  | 'connecting'
+  | 'error';
+
+export interface ConnectionEvent {
+  status: ConnectionStatus;
+  timestamp: number;
+  error?: string;
+}
+
+/**
+ * WebSocket Port - абстракция для любого WebSocket соединения
+ */
+export abstract class WebSocketPort {
+  abstract connect(): Observable<ConnectionEvent>;
+
+  abstract disconnect(): void;
+
+  abstract subscribe<T>(channel: string): Observable<T>;
+
+  abstract unsubscribe(channel: string): void;
+
+  abstract getConnectionStatus(): Observable<ConnectionStatus>;
+}

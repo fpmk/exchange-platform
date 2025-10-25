@@ -1,0 +1,21 @@
+{
+  "name": "symbol-selector",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/widgets/symbol-selector/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:widget scope:market"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ui/widgets/symbol-selector/jest.config.ts",
+        "tsConfig": "libs/ui/widgets/symbol-selector/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

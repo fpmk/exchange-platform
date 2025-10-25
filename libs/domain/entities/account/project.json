@@ -1,0 +1,21 @@
+{
+  "name": "account",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/entities/account/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:domain scope:account"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/domain/entities/account/jest.config.ts",
+        "tsConfig": "libs/domain/entities/account/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

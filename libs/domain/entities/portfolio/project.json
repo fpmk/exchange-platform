@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/entities/portfolio/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:domain scope:portfolio"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/domain/entities/portfolio/jest.config.ts",
+        "tsConfig": "libs/domain/entities/portfolio/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

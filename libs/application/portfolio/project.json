@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-use-cases",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/application/portfolio/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:application scope:portfolio"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/application/portfolio/jest.config.ts",
+        "tsConfig": "libs/application/portfolio/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

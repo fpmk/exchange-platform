@@ -1,0 +1,21 @@
+{
+  "name": "market-watch",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/widgets/market-watch/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:widget scope:market"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/ui/widgets/market-watch/jest.config.ts",
+        "tsConfig": "libs/ui/widgets/market-watch/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

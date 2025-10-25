@@ -1,0 +1,87 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "emitDecoratorMetadata": false,
+    "target": "es2022",
+    "module": "preserve",
+    "lib": ["es2020", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@exchange-platform/core-widgets": ["libs/core/widgets/src/index.ts"],
+      "@exchange-platform/chart-widget": [
+        "libs/ui/widgets/chart-widget/src/index.ts"
+      ],
+      "@exchange-platform/orderbook-widget": [
+        "libs/ui/widgets/orderbook-widget/src/index.ts"
+      ],
+      "@exchange-platform/order-form-widget": [
+        "libs/ui/widgets/order-form-widget/src/index.ts"
+      ],
+      "@exchange-platform/orders-list-widget": [
+        "libs/ui/widgets/orders-list-widget/src/index.ts"
+      ],
+      "@exchange-platform/balance-widget": [
+        "libs/ui/widgets/balance-widget/src/index.ts"
+      ],
+      "@exchange-platform/symbol-selector-widget": [
+        "libs/ui/widgets/symbol-selector-widget/src/index.ts"
+      ],
+      "@exchange-platform/shared-utils": ["libs/shared/utils/src/index.ts"],
+      "@exchange-platform/ports": ["libs/domain/ports/src/index.ts"],
+      "@exchange-platform/widget-system": [
+        "libs/ui/widget-system/src/index.ts"
+      ],
+      "@exchange-platform/state": ["libs/infrastructure/state/src/index.ts"],
+      "@exchange-platform/market": ["libs/domain/entities/market/src/index.ts"],
+      "@exchange-platform/trading": [
+        "libs/domain/entities/trading/src/index.ts"
+      ],
+      "@exchange-platform/portfolio": [
+        "libs/domain/entities/portfolio/src/index.ts"
+      ],
+      "@exchange-platform/account": [
+        "libs/domain/entities/account/src/index.ts"
+      ],
+      "@exchange-platform/market-use-cases": [
+        "libs/application/market/src/index.ts"
+      ],
+      "@exchange-platform/trading-use-cases": [
+        "libs/application/trading/src/index.ts"
+      ],
+      "@exchange-platform/portfolio-use-cases": [
+        "libs/application/portfolio/src/index.ts"
+      ],
+      "@exchange-platform/bybit": ["libs/infrastructure/bybit/src/index.ts"],
+      "@exchange-platform/storage": [
+        "libs/infrastructure/storage/src/index.ts"
+      ],
+      "@exchange-platform/chart": ["libs/ui/widgets/chart/src/index.ts"],
+      "@exchange-platform/binance": [
+        "libs/infrastructure/binance/src/index.ts"
+      ],
+      "@exchange-platform/orderbook": [
+        "libs/ui/widgets/orderbook/src/index.ts"
+      ],
+      "@exchange-platform/order-form": [
+        "libs/ui/widgets/order-form/src/index.ts"
+      ],
+      "@exchange-platform/orders-list": [
+        "libs/ui/widgets/orders-list/src/index.ts"
+      ],
+      "@exchange-platform/balance": ["libs/ui/widgets/src/index.ts"],
+      "@exchange-platform/symbol-selector": [
+        "libs/ui/widgets/symbol-selector/src/index.ts"
+      ],
+      "@exchange-platform/ticker": ["libs/widgets/ticker/src/index.ts"],
+      "@exchange-platform/market-watch": [
+        "libs/ui/widgets/market-watch/src/index.ts"
+      ],
+      "@exchange-platform/chart-lib": [
+        "libs/ui/components/chart-lib/src/index.ts"
+      ],
+      "@exchange-platform/constants": ["libs/shared/constants/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

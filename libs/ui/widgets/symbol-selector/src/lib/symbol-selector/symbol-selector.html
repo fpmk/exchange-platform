@@ -1,0 +1,11 @@
+<select
+  [value]="appState.selectedSymbol()"
+  (change)="onSymbolChange($event)"
+  class="bg-gray-700 px-4 py-2 rounded text-white border border-gray-600 focus:border-blue-500 focus:outline-none"
+>
+  <option value="BTCUSDT">BTC/USDT</option>
+  <option value="ETHUSDT">ETH/USDT</option>
+  <option value="BNBUSDT">BNB/USDT</option>
+  <option value="SOLUSDT">SOL/USDT</option>
+  <option value="ADAUSDT">ADA/USDT</option>
+</select>
