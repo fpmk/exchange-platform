@@ -44,13 +44,13 @@
         "libs/domain/entities/account/src/index.ts"
       ],
       "@exchange-platform/market-use-cases": [
-        "libs/application/market/src/index.ts"
+        "libs/application/use-cases/market/src/index.ts"
       ],
       "@exchange-platform/trading-use-cases": [
-        "libs/application/trading/src/index.ts"
+        "libs/application/use-cases/trading/src/index.ts"
       ],
       "@exchange-platform/portfolio-use-cases": [
-        "libs/application/portfolio/src/index.ts"
+        "libs/application/use-cases/portfolio/src/index.ts"
       ],
       "@exchange-platform/bybit": ["libs/infrastructure/bybit/src/index.ts"],
       "@exchange-platform/storage": [
@@ -77,10 +77,11 @@
       "@exchange-platform/market-watch": [
         "libs/ui/widgets/market-watch/src/index.ts"
       ],
-      "@exchange-platform/chart-lib": [
-        "libs/ui/components/chart-lib/src/index.ts"
+      "@exchange-platform/chart-ui": [
+        "libs/ui/components/lightweight-chart/src/index.ts"
       ],
-      "@exchange-platform/constants": ["libs/shared/constants/src/index.ts"]
+      "@exchange-platform/constants": ["libs/shared/constants/src/index.ts"],
+      "@exchange-platform/mapper": ["libs/infrastructure/mapper/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

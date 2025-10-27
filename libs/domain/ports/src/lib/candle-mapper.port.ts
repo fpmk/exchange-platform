@@ -1,4 +1,4 @@
-import { CandlestickData, VolumeData } from '@exchange-platform/chart-lib';
+import { CandlestickData, VolumeData } from '@exchange-platform/chart-ui';
 import { Candle } from '@exchange-platform/market';
 
 export abstract class CandleMapperPort {

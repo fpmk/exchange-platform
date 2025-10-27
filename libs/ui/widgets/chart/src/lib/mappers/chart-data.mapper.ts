@@ -1,5 +1,6 @@
 import { Candle } from '@exchange-platform/market';
-import { CandlestickData, VolumeData } from '@exchange-platform/chart-lib';
+import { CandlestickData } from 'lightweight-charts';
+import { VolumeData } from '@exchange-platform/chart-ui';
 
 /**
  * Presentation Layer Mapper

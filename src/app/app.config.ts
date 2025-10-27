@@ -4,9 +4,10 @@ import { provideHttpClient } from '@angular/common/http';
 import { appRoutes } from './app.routes';
 
 // Ports (Abstractions)
-import { MarketDataPort, StoragePort, WebSocketPort } from '@exchange-platform/ports';
+import { CandleMapperPort, MarketDataPort, StoragePort, WebSocketPort } from '@exchange-platform/ports';
 import { BinanceMarketDataAdapter, BinanceWebSocketAdapter } from '@exchange-platform/binance';
 import { LocalStorageAdapter } from '@exchange-platform/storage';
+import { CandleMapperAdapter } from '@exchange-platform/mapper';
 
 /**
  * Application Configuration
@@ -33,6 +34,10 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MarketDataPort,
       useClass: BinanceMarketDataAdapter,
+    },
+    {
+      provide: CandleMapperPort,
+      useClass: CandleMapperAdapter,
     },
 
     // TODO: Trading & Account adapters

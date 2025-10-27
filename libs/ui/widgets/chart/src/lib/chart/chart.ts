@@ -17,10 +17,10 @@ import {
   CandlestickData,
   ChartComponent,
   VolumeData,
-} from '@exchange-platform/chart-lib';
+} from '@exchange-platform/chart-ui';
 import { ChartStore } from '../store/chart.store';
-import { ChartDataMapper } from '../mappers/chart-data.mapper';
 import { ChartFacade } from '../facades/chart.facade';
+import { CandleMapperPort } from '@exchange-platform/ports';
 
 @RegisterWidget({
   type: 'chart',
@@ -44,7 +44,7 @@ import { ChartFacade } from '../facades/chart.facade';
 @Component({
   selector: 'lib-chart-widget',
   standalone: true,
-  imports: [CommonModule, SymbolSelector, ChartComponent],
+  imports: [CommonModule, SymbolSelector, ChartComponent, ChartComponent],
   providers: [ChartStore, ChartFacade],
   templateUrl: './chart.html',
   styleUrl: './chart.scss',
@@ -56,6 +56,7 @@ export class ChartWidgetComponent implements OnInit {
   protected readonly store = inject(ChartStore);
   protected readonly chartFacade = inject(ChartFacade);
   protected readonly appState = inject(AppStore);
+  protected readonly candleMapper = inject(CandleMapperPort);
 
   // UI State
   protected showVolume = signal(false);
@@ -78,10 +79,10 @@ export class ChartWidgetComponent implements OnInit {
       const storeCandles = this.store.candles();
       untracked(() => {
         const candles = storeCandles.map((c) =>
-          ChartDataMapper.toCandlestickData(c)
+          this.candleMapper.toChartData(c)
         );
         const volumes = storeCandles.map((c) =>
-          ChartDataMapper.toVolumeData(c)
+          this.candleMapper.toVolumeData(c)
         );
         if (!this.chartData().length) {
           this.chartData.set(candles);
