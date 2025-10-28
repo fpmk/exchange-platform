@@ -1,0 +1,21 @@
+{
+  "name": "domain-validators",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/validators/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:domain scope:validators"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/domain/validators/jest.config.ts",
+        "tsConfig": "libs/domain/validators/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

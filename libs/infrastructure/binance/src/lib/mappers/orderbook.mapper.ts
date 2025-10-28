@@ -1,4 +1,7 @@
-import { BinanceWsDepthMessage } from '../types/binance-ws.types';
+import {
+  BinanceWsDepthLimitMessage,
+  BinanceWsDepthMessage,
+} from '../types/binance-ws.types';
 import { BinanceRestDepth } from '../types/binance-rest.types';
 import { OrderBook, OrderBookLevel } from '@exchange-platform/market';
 
@@ -29,9 +32,21 @@ export class OrderBookMapper {
     };
   }
 
+  /**
+   * Map WebSocket Depth Update to OrderBook
+   */
+  static fromWsLevelDepth(message: BinanceWsDepthLimitMessage): OrderBook {
+    return {
+      symbol: '',
+      timestamp: 0,
+      bids: this.mapLevels(message.bids),
+      asks: this.mapLevels(message.asks),
+      lastUpdateId: message.lastUpdateId,
+    };
+  }
+
   private static mapLevels(levels: [string, string][]): OrderBookLevel[] {
     let cumulativeTotal = 0;
-
     return levels
       .map(([price, quantity]) => {
         const qty = parseFloat(quantity);

@@ -32,7 +32,7 @@
       "@exchange-platform/widget-system": [
         "libs/ui/widget-system/src/index.ts"
       ],
-      "@exchange-platform/state": ["libs/infrastructure/state/src/index.ts"],
+      "@exchange-platform/state": ["libs/application/state/src/index.ts"],
       "@exchange-platform/market": ["libs/domain/entities/market/src/index.ts"],
       "@exchange-platform/trading": [
         "libs/domain/entities/trading/src/index.ts"
@@ -77,11 +77,14 @@
       "@exchange-platform/market-watch": [
         "libs/ui/widgets/market-watch/src/index.ts"
       ],
-      "@exchange-platform/chart-ui": [
-        "libs/ui/components/lightweight-chart/src/index.ts"
-      ],
       "@exchange-platform/constants": ["libs/shared/constants/src/index.ts"],
-      "@exchange-platform/mapper": ["libs/infrastructure/mapper/src/index.ts"]
+      "@exchange-platform/mapper": ["libs/infrastructure/mapper/src/index.ts"],
+      "@exchange-platform/types": ["libs/domain/types/src/index.ts"],
+      "@exchange-platform/feature-chart": ["libs/features/chart/src/index.ts"],
+      "@exchange-platform/api": ["libs/infrastructure/api/src/index.ts"],
+      "@exchange-platform/domain-validators": [
+        "libs/domain/validators/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

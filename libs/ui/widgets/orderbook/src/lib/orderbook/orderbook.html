@@ -1,1 +1,26 @@
-<p>Orderbook works!</p>
+<div class="grid grid-cols-3 gap-1 text-xs">
+  <div>Price</div>
+  <div class="text-right">Amount</div>
+  <div class="text-right">Total</div>
+
+  @for (ask of tradeStore.orderBook.asks().reverse(); track ask.price) {
+    <div class="w-full grid grid-cols-3 col-span-3 cursor-pointer" (click)="tradeStore.setPrice(ask.price)" (keydown.enter)="tradeStore.setPrice(ask.price)" [tabindex]="$index">
+      <div class="text-red-600">{{ ask.price | number: '1.2-2' }}</div>
+      <div class="text-right">{{ ask.quantity | number: '1.5-5' }}</div>
+      <div class="text-right">{{ ask.total | number: '1.2-2' }}</div>
+    </div>
+  }
+  @let prev = chartStore?.lastTwoCandles()?.prev;
+  @let current = chartStore?.lastTwoCandles()?.current;
+  <div class="col-span-3 w-full text-xl my-1"
+       [class.text-red-600]="(current?.close || 0) < (prev?.close || 0)"
+       [class.text-green-600]="(current?.close || 0) >= (prev?.close || 0)">{{ current?.close }}
+  </div>
+  @for (bid of tradeStore.orderBook.bids(); track bid.price) {
+    <div class="w-full grid grid-cols-3 col-span-3 cursor-pointer" (click)="tradeStore.setPrice(bid.price)" (keydown.enter)="tradeStore.setPrice(bid.price)" [tabindex]="$index">
+      <div class="text-green-600">{{ bid.price | number: '1.2-2' }}</div>
+      <div class="text-right">{{ bid.quantity | number: '1.5-5' }}</div>
+      <div class="text-right">{{ bid.total | number: '1.2-2' }}</div>
+    </div>
+  }
+</div>

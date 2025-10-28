@@ -2,17 +2,6 @@ import { Candle } from '@exchange-platform/market';
 import { BinanceKline } from '../types/binance-ws.types';
 import { BinanceRestKline } from '../types/binance-rest.types';
 
-/**
- * Infrastructure Layer Mapper
- *
- * Responsibility: Transform external API data (Binance) to Domain models
- * Location: Infrastructure Layer (binance adapter)
- *
- * Clean Architecture Rule:
- * - Infrastructure depends on Domain ✅
- * - Infrastructure does NOT depend on Presentation ✅
- * - No UI concerns (colors, formatting for specific libraries) ✅
- */
 export class CandleMapper {
   /**
    * Map WebSocket Kline to Domain Candle

@@ -35,26 +35,26 @@
 
   <!-- Main Content - Widget Grid -->
   <main class="flex-1 p-2 overflow-hidden">
-    <div class="grid grid-cols-12 gap-2 h-full">
+    <div class="grid grid-cols-12 grid-rows-6 gap-2 h-full">
       <!-- Chart Widget (Large) -->
-      <div class="col-span-8 row-span-2 bg-gray-800 overflow-hidden">
+      <div class="col-span-8 row-span-4 bg-gray-800 overflow-hidden">
         <lib-chart-widget />
       </div>
 
       <!-- Order Book Widget (Coming soon) -->
-      <div class="col-span-2 row-span-2 bg-gray-800 p-4">
+      <div class="col-span-2 row-span-4 bg-gray-800 p-4">
         <h3 class="text-lg font-semibold mb-2">Order Book</h3>
         <lib-orderbook-widget />
       </div>
 
       <!-- Order Form Widget (Coming soon) -->
-      <div class="col-span-2 row-span-2 bg-gray-800 p-4">
+      <div class="col-span-2 row-span-4 bg-gray-800 p-4">
         <h3 class="text-lg font-semibold mb-2">Place Order</h3>
-        <div class="text-gray-500 text-sm">Coming in next step...</div>
+        <lib-order-form/>
       </div>
 
       <!-- Orders List Widget (Coming soon) -->
-      <div class="col-span-12 row-span-1 bg-gray-800 p-4">
+      <div class="col-span-12 row-span-2 bg-gray-800 p-4">
         <h3 class="text-lg font-semibold mb-2">Open Orders</h3>
         <div class="text-gray-500 text-sm">Coming in next step...</div>
       </div>

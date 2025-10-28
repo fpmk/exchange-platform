@@ -22,12 +22,12 @@ export class SubscribeToOrderBookUseCase {
       .subscribeToOrderBookUpdates(
         command.symbol,
         command.updateSpeed ?? '100ms'
-      )
-      .pipe(
-        tap((orderbook) => {
-          const spread = orderbook.asks[0]?.price - orderbook.bids[0]?.price;
-          console.log(`📖 Order book update: spread=${spread.toFixed(2)}`);
-        })
       );
+      // .pipe(
+      //   tap((orderbook) => {
+      //     const spread = orderbook.asks[0]?.price - orderbook.bids[0]?.price;
+      //     console.log(` Order book update: spread=${spread.toFixed(2)}`);
+      //   })
+      // );
   }
 }

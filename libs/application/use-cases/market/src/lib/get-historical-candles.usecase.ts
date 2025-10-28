@@ -20,7 +20,6 @@ export class GetHistoricalCandlesUseCase {
   private marketDataPort = inject(MarketDataPort);
 
   execute(query: GetHistoricalCandlesQuery): Observable<Candle[]> {
-    console.log('[changeCandleInterval] for symbol', query);
     this.validate(query);
 
     return this.marketDataPort

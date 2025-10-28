@@ -3,13 +3,12 @@ import {
   GetHistoricalCandlesUseCase,
   SubscribeToCandlesUseCase,
 } from '@exchange-platform/market-use-cases';
-import { ChartState, ChartStore } from '../store/chart.store';
 import { CandleInterval } from '@exchange-platform/market';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { filter, map, Subscription, take } from 'rxjs';
 import { StoragePort } from '@exchange-platform/ports';
-import { AppStore } from '../../../../../../infrastructure/state/src/lib/stores/app.store';
+import { AppStore, ChartState, ChartStore } from '@exchange-platform/state';
 
 @Injectable()
 export class ChartFacade {

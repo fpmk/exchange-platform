@@ -1,58 +1,50 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { appRoutes } from './app.routes';
 
 // Ports (Abstractions)
-import { CandleMapperPort, MarketDataPort, StoragePort, WebSocketPort } from '@exchange-platform/ports';
+import { MarketDataPort, StoragePort, TradingPort, WebSocketPort } from '@exchange-platform/ports';
 import { BinanceMarketDataAdapter, BinanceWebSocketAdapter } from '@exchange-platform/binance';
 import { LocalStorageAdapter } from '@exchange-platform/storage';
-import { CandleMapperAdapter } from '@exchange-platform/mapper';
 
-/**
- * Application Configuration
- *
- * 🎯 This is the ONLY place that knows about specific implementations (Binance)
- *
- * To switch to Bybit:
- * 1. Import BybitMarketDataAdapter, BybitWebSocketAdapter
- * 2. Change useClass below
- * 3. Done! ✅
- */
+// Feature Providers
+import { CHART_FEATURE_PROVIDERS } from '@exchange-platform/feature-chart';
+import { TradingApiAdapter } from '../../libs/infrastructure/api/src/lib/trading-api.adapter';
+
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(appRoutes),
     provideHttpClient(),
 
-    // DEPENDENCY INJECTION (Clean Architecture)
-    // Core depends on Ports (abstractions), not Adapters (implementations)
+    // ============================================
+    // SHARED INFRASTRUCTURE (Exchange Adapters)
+    // ============================================
     {
       provide: WebSocketPort,
-      useClass: BinanceWebSocketAdapter,
+      useClass: BinanceWebSocketAdapter, // ← Switch to Bybit here
     },
     {
       provide: MarketDataPort,
-      useClass: BinanceMarketDataAdapter,
+      useClass: BinanceMarketDataAdapter, // ← Switch to Bybit here
     },
     {
-      provide: CandleMapperPort,
-      useClass: CandleMapperAdapter,
+      provide: StoragePort,
+      useClass: LocalStorageAdapter,
     },
-
-    // TODO: Trading & Account adapters
-    // {
-    //   provide: TradingPort,
-    //   useClass: BinanceTradingAdapter
-    // },
+    {
+      provide: TradingPort,
+      useClass: TradingApiAdapter,
+    },
     // {
     //   provide: AccountPort,
     //   useClass: BinanceAccountAdapter
     // },
 
-    {
-      provide: StoragePort,
-      useClass: LocalStorageAdapter,
-    },
+    // ============================================
+    // FEATURE-SPECIFIC PROVIDERS
+    // ============================================
+    ...CHART_FEATURE_PROVIDERS,
   ],
 };

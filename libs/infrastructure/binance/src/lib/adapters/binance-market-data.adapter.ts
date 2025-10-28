@@ -4,7 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 import { MarketDataPort, WebSocketPort } from '@exchange-platform/ports';
 import { Candle, CandleInterval, OrderBook, Symbol } from '@exchange-platform/market';
 import { BinanceRest24hrTicker, BinanceRestDepth, BinanceRestKline } from '../types/binance-rest.types';
-import { BinanceWsDepthMessage, BinanceWsKlineMessage, BinanceWsTickerMessage } from '../types/binance-ws.types';
+import { BinanceWsDepthLimitMessage, BinanceWsKlineMessage, BinanceWsTickerMessage } from '../types/binance-ws.types';
 import { CandleMapper } from '../mappers/candle.mapper';
 import { OrderBookMapper } from '../mappers/orderbook.mapper';
 import { SymbolMapper } from '../mappers/symbol.mapper';
@@ -142,7 +142,10 @@ export class BinanceMarketDataAdapter implements MarketDataPort {
     return this.ws.subscribe<BinanceWsKlineMessage>(stream).pipe(
       map((message) => CandleMapper.fromWsKline(message.k)),
       catchError((error) => {
-        const errorMessage = error?.message || error?.toString() || 'Failed to subscribe to candle updates';
+        const errorMessage =
+          error?.message ||
+          error?.toString() ||
+          'Failed to subscribe to candle updates';
         console.error('Candle stream error:', errorMessage, error);
         return throwError(() => new Error(errorMessage));
       })
@@ -158,12 +161,15 @@ export class BinanceMarketDataAdapter implements MarketDataPort {
     updateSpeed: '100ms' | '1000ms' = '100ms'
   ): Observable<OrderBook> {
     const speedSuffix = updateSpeed === '100ms' ? '@100ms' : '';
-    const stream = `${symbol.toLowerCase()}@depth${speedSuffix}`;
+    const stream = `${symbol.toLowerCase()}@depth10${speedSuffix}`;
 
-    return this.ws.subscribe<BinanceWsDepthMessage>(stream).pipe(
-      map((message) => OrderBookMapper.fromWsDepth(message)),
+    return this.ws.subscribe<BinanceWsDepthLimitMessage>(stream).pipe(
+      map((message) => OrderBookMapper.fromWsLevelDepth(message)),
       catchError((error) => {
-        const errorMessage = error?.message || error?.toString() || 'Failed to subscribe to order book updates';
+        const errorMessage =
+          error?.message ||
+          error?.toString() ||
+          'Failed to subscribe to order book updates';
         console.error('Order book stream error:', errorMessage, error);
         return throwError(() => new Error(errorMessage));
       })
@@ -180,7 +186,10 @@ export class BinanceMarketDataAdapter implements MarketDataPort {
     return this.ws.subscribe<BinanceWsTickerMessage>(stream).pipe(
       map((message) => SymbolMapper.fromWsTicker(message)),
       catchError((error) => {
-        const errorMessage = error?.message || error?.toString() || 'Failed to subscribe to ticker updates';
+        const errorMessage =
+          error?.message ||
+          error?.toString() ||
+          'Failed to subscribe to ticker updates';
         console.error('Ticker stream error:', errorMessage, error);
         return throwError(() => new Error(errorMessage));
       })
@@ -201,7 +210,10 @@ export class BinanceMarketDataAdapter implements MarketDataPort {
           .map((m) => SymbolMapper.fromWsTicker(m))
       ),
       catchError((error) => {
-        const errorMessage = error?.message || error?.toString() || 'Failed to subscribe to all tickers updates';
+        const errorMessage =
+          error?.message ||
+          error?.toString() ||
+          'Failed to subscribe to all tickers updates';
         console.error('All tickers stream error:', errorMessage, error);
         return throwError(() => new Error(errorMessage));
       })

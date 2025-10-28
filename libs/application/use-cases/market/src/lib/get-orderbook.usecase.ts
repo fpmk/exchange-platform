@@ -19,7 +19,7 @@ export class GetOrderBookUseCase {
     console.log(`Loading order book: ${query.symbol}`);
 
     return this.marketDataPort
-      .getOrderBook(query.symbol, query.limit ?? 20)
+      .getOrderBook(query.symbol, query.limit ?? 10)
       .pipe(
         tap((orderbook) => {
           console.log(`Order book loaded:`, {

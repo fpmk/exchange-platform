@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AppStore, WebSocketStore } from '@exchange-platform/state';
 import { Orderbook } from '@exchange-platform/orderbook';
 import { ChartWidgetComponent } from '@exchange-platform/chart';
+import { OrderForm } from '@exchange-platform/order-form';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ChartWidgetComponent, Orderbook],
+  imports: [CommonModule, ChartWidgetComponent, Orderbook, OrderForm],
   selector: 'app-trading',
   templateUrl: './trading.html',
   styleUrl: './trading.scss',

@@ -55,11 +55,10 @@
       </div>
     } @else if (store.hasData()) {
       <div class="h-full bg-gray-900 flex items-center justify-center relative">
-        <lib-lightweight-chart
+        <lib-chart
           #chart
           [loading]="store.loading()"
           [data]="chartData()"
-          [volumeData]="volumeData()"
           [showVolume]="showVolume()"
           [theme]="appState.theme()"
           (chartReady)="onChartReady()"
