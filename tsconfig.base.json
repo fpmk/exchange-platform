@@ -84,7 +84,8 @@
       "@exchange-platform/api": ["libs/infrastructure/api/src/index.ts"],
       "@exchange-platform/domain-validators": [
         "libs/domain/validators/src/index.ts"
-      ]
+      ],
+      "@exchange-platform/test-mocks": ["libs/shared/test-mocks/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -24,7 +24,7 @@ import { RegisterWidget } from '@exchange-platform/widget-system';
 export class SymbolSelector {
   protected readonly appState = inject(AppStore);
 
-  protected onSymbolChange(event: Event) {
+  onSymbolChange(event: Event) {
     const select = event.target as HTMLSelectElement;
     this.appState.selectSymbol(select.value);
   }

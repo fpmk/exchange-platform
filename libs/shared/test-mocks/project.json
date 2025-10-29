@@ -1,0 +1,13 @@
+{
+  "name": "shared-test-mocks",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/test-mocks/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:shared"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
