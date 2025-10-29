@@ -1,1 +1,1 @@
-export * from './lib/api/api';
+export * from './lib/trading-api.adapter';

@@ -10,7 +10,7 @@ import { LocalStorageAdapter } from '@exchange-platform/storage';
 
 // Feature Providers
 import { CHART_FEATURE_PROVIDERS } from '@exchange-platform/feature-chart';
-import { TradingApiAdapter } from '../../libs/infrastructure/api/src/lib/trading-api.adapter';
+import { TradingApiAdapter } from '@exchange-platform/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [

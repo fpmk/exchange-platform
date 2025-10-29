@@ -1,11 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { signal } from '@angular/core';
 import { Orderbook } from './orderbook';
 import { AppStore, ChartStore, TradeStore } from '@exchange-platform/state';
 import { OrderBookFacade } from '../facades/order-book.facade';
-import { StoragePort, MarketDataPort } from '@exchange-platform/ports';
-import { of } from 'rxjs';
-import { createMockAppStore, createMockChartStore, createMockTradeStore } from '@exchange-platform/test-mocks';
+import { MarketDataPort, StoragePort } from '@exchange-platform/ports';
+import {
+  createMockAppStore,
+  createMockChartStore,
+  createMockMarketDataPort,
+  createMockStoragePort,
+  createMockTradeStore,
+} from '@exchange-platform/test-mocks';
 
 describe('Orderbook', () => {
   let component: Orderbook;
@@ -19,39 +23,24 @@ describe('Orderbook', () => {
 
   beforeEach(async () => {
     mockAppStore = {
-      ...createMockAppStore()
+      ...createMockAppStore(),
     };
 
     mockChartStore = {
-      ...createMockChartStore()
+      ...createMockChartStore(),
     };
 
     mockTradeStore = {
-      ...createMockTradeStore()
+      ...createMockTradeStore(),
     };
 
     mockOrderBookFacade = {
       loadOrderbook: jest.fn(),
     };
 
-    mockStorage = {
-      get: jest.fn(),
-      set: jest.fn(),
-      remove: jest.fn(),
-      clear: jest.fn(),
-      has: jest.fn(),
-    };
+    mockStorage = { ...createMockStoragePort() };
 
-    mockMarketDataPort = {
-      getCandles: jest.fn().mockReturnValue(of([])),
-      getOrderBook: jest.fn().mockReturnValue(of({ bids: [], asks: [] })),
-      getSymbols: jest.fn().mockReturnValue(of([])),
-      getSymbol: jest.fn().mockReturnValue(of({})),
-      subscribeToCandleUpdates: jest.fn().mockReturnValue(of({})),
-      subscribeToOrderBookUpdates: jest.fn().mockReturnValue(of({ bids: [], asks: [] })),
-      subscribeToTickerUpdates: jest.fn().mockReturnValue(of({})),
-      subscribeToAllTickersUpdates: jest.fn().mockReturnValue(of([])),
-    };
+    mockMarketDataPort = { ...createMockMarketDataPort() };
 
     await TestBed.configureTestingModule({
       imports: [Orderbook],
