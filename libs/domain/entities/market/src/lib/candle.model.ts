@@ -1,6 +1,3 @@
-/**
- * Candle (свеча) - модель для отображения ценовых данных
- */
 export interface Candle {
   time: number; // Unix timestamp (seconds)
   open: number;

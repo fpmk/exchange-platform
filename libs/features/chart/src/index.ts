@@ -17,11 +17,3 @@ export type { ChartOptions, ChartSeriesConfig, IndicatorConfig } from './lib/dom
 
 // Application Layer (for testing/advanced use)
 export { ChartFacade } from './lib/application/facades/chart.facade';
-
-/**
- * Infrastructure implementations are NOT exported
- * (they are implementation details)
- *
- * To use a different implementation:
- * → Change chart-feature.config.ts
- */

@@ -13,7 +13,6 @@ import {
 describe('OrderForm', () => {
   let component: OrderForm;
   let fixture: ComponentFixture<OrderForm>;
-  let fb: FormBuilder;
   let mockAppStore: any;
   let tradeStore: any;
   let mockTradingPort: any;
@@ -49,7 +48,7 @@ describe('OrderForm', () => {
   it('should call placeOrder on facade when placeOrder is triggered', async () => {
     const orderFormFacade = component['orderFormFacade'];
     const spy = jest.spyOn(orderFormFacade, 'placeOrder');
-    component['orderForm'].patchValue({ price: 50000, size: 0.01 });
+    component['orderForm'].setValue({ price: 50000, size: 0.01 });
 
     component.placeOrder('BUY');
 

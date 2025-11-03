@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MarketDataPort } from '@exchange-platform/ports';
+import { WsMarketDataPort } from '@exchange-platform/ports';
 import { Candle, CandleInterval } from '@exchange-platform/market';
 
 export interface SubscribeToCandlesCommand {
@@ -14,7 +14,7 @@ export interface SubscribeToCandlesCommand {
  */
 @Injectable({ providedIn: 'root' })
 export class SubscribeToCandlesUseCase {
-  private marketDataPort = inject(MarketDataPort);
+  private readonly _wsMarketDataPort = inject(WsMarketDataPort);
 
   execute(command: SubscribeToCandlesCommand): Observable<Candle> {
     this.validate(command);
@@ -23,7 +23,7 @@ export class SubscribeToCandlesUseCase {
       `Subscribing to candles: ${command.symbol} ${command.interval}`
     );
 
-    return this.marketDataPort.subscribeToCandleUpdates(
+    return this._wsMarketDataPort.subscribeToCandleUpdates(
       command.symbol,
       command.interval
     );

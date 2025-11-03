@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { MarketDataPort, WebSocketPort } from '@exchange-platform/ports';
+import { MarketDataPort, ExchangeWebsocketPort } from '@exchange-platform/ports';
 import { Candle, CandleInterval, OrderBook, Symbol } from '@exchange-platform/market';
 import { BinanceRest24hrTicker, BinanceRestDepth, BinanceRestKline } from '../types/binance-rest.types';
 import { BinanceWsDepthLimitMessage, BinanceWsKlineMessage, BinanceWsTickerMessage } from '../types/binance-ws.types';
@@ -12,12 +12,11 @@ import { BINANCE_ENVIRONMENTS, DEFAULT_BINANCE_CONFIG } from '../config/binance.
 
 /**
  * Binance implementation of MarketDataPort
- * Handles both REST API and WebSocket streams
  */
 @Injectable()
 export class BinanceMarketDataAdapter implements MarketDataPort {
   private http = inject(HttpClient);
-  private ws = inject(WebSocketPort);
+  private ws = inject(ExchangeWebsocketPort);
 
   private readonly config = DEFAULT_BINANCE_CONFIG;
   private readonly env = BINANCE_ENVIRONMENTS[this.config.environment];

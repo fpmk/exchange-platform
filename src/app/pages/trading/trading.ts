@@ -1,9 +1,15 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppStore, WebSocketStore } from '@exchange-platform/state';
+import { AppStore, ExchangeWebSocketStore } from '@exchange-platform/state';
 import { Orderbook } from '@exchange-platform/orderbook';
 import { ChartWidgetComponent } from '@exchange-platform/chart';
 import { OrderForm } from '@exchange-platform/order-form';
+import { WebsocketService } from '@exchange-platform/application-services';
 
 @Component({
   standalone: true,
@@ -15,9 +21,11 @@ import { OrderForm } from '@exchange-platform/order-form';
 })
 export class TradingPage implements OnInit {
   protected readonly appState = inject(AppStore);
-  protected readonly wsManager = inject(WebSocketStore);
+  protected readonly wsStore = inject(ExchangeWebSocketStore);
+  private readonly wsService = inject(WebsocketService);
 
   ngOnInit() {
+    this.wsService.connect();
     this.appState.markAsInitialized();
   }
 

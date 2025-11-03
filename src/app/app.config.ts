@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { appRoutes } from './app.routes';
 
 // Ports (Abstractions)
-import { MarketDataPort, StoragePort, TradingPort, WebSocketPort } from '@exchange-platform/ports';
+import { MarketDataPort, StoragePort, TradingPort, ExchangeWebsocketPort, WsMarketDataPort } from '@exchange-platform/ports';
 import { BinanceMarketDataAdapter, BinanceWebSocketAdapter } from '@exchange-platform/binance';
 import { LocalStorageAdapter } from '@exchange-platform/storage';
 
@@ -22,11 +22,15 @@ export const appConfig: ApplicationConfig = {
     // SHARED INFRASTRUCTURE (Exchange Adapters)
     // ============================================
     {
-      provide: WebSocketPort,
+      provide: ExchangeWebsocketPort,
       useClass: BinanceWebSocketAdapter, // ← Switch to Bybit here
     },
     {
       provide: MarketDataPort,
+      useClass: BinanceMarketDataAdapter, // ← Switch to Bybit here
+    },
+    {
+      provide: WsMarketDataPort,
       useClass: BinanceMarketDataAdapter, // ← Switch to Bybit here
     },
     {

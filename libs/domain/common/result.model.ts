@@ -1,6 +1,3 @@
-/**
- * Result Pattern для обработки ошибок
- */
 export type Result<T, E = Error> = Success<T> | Failure<E>;
 
 export interface Success<T> {

@@ -1,8 +1,5 @@
 import { Observable } from 'rxjs';
 
-/**
- * Storage Port - для сохранения настроек, layouts и т.д.
- */
 export abstract class StoragePort {
   abstract get<T>(key: string): Observable<T | null>;
 

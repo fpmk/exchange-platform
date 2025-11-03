@@ -10,14 +10,14 @@
       <div class="flex items-center gap-2">
         <div
           class="w-2 h-2 rounded-full transition-colors"
-          [class.bg-green-500]="wsManager.isConnected()"
-          [class.bg-yellow-500]="wsManager.isConnecting()"
+          [class.bg-green-500]="wsStore.isConnected()"
+          [class.bg-yellow-500]="wsStore.isConnecting()"
           [class.bg-red-500]="
-                !wsManager.isConnected() && !wsManager.isConnecting()
+                !wsStore.isConnected() && !wsStore.isConnecting()
               "
         ></div>
         <span class="text-xs text-gray-400">
-          {{ wsManager.status() }}
+          {{ wsStore.status() }}
         </span>
       </div>
     </div>
@@ -50,7 +50,7 @@
       <!-- Order Form Widget (Coming soon) -->
       <div class="col-span-2 row-span-4 bg-gray-800 p-4">
         <h3 class="text-lg font-semibold mb-2">Place Order</h3>
-        <lib-order-form/>
+        <lib-order-form />
       </div>
 
       <!-- Orders List Widget (Coming soon) -->

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { TradingPage } from './trading';
-import { WebSocketPort, MarketDataPort, StoragePort, TradingPort } from '@exchange-platform/ports';
+import { ExchangeWebsocketPort, MarketDataPort, StoragePort, TradingPort } from '@exchange-platform/ports';
 import { ChartFacade } from '@exchange-platform/chart';
 
 describe('TradingPage', () => {
@@ -55,7 +55,7 @@ describe('TradingPage', () => {
       imports: [TradingPage],
       providers: [
         {
-          provide: WebSocketPort,
+          provide: ExchangeWebsocketPort,
           useValue: mockWebSocketPort
         },
         {

@@ -14,8 +14,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AppStore, TradeStore } from '@exchange-platform/state';
-import { OrderFormFacade } from '../facades/order-form.facade';
 import { OrderSide } from '@exchange-platform/trading';
+import { OrderService } from '@exchange-platform/application-services';
 
 @RegisterWidget({
   type: 'order-form',
@@ -35,7 +35,6 @@ import { OrderSide } from '@exchange-platform/trading';
 @Component({
   selector: 'lib-order-form',
   imports: [ReactiveFormsModule],
-  providers: [OrderFormFacade],
   templateUrl: './order-form.html',
   styleUrl: './order-form.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,7 +44,7 @@ export class OrderForm implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly tradeStore = inject(TradeStore);
   private readonly appStore = inject(AppStore);
-  private readonly orderFormFacade = inject(OrderFormFacade);
+  private readonly orderService = inject(OrderService);
 
   constructor() {
     this.orderForm = this.fb.group({
@@ -64,7 +63,7 @@ export class OrderForm implements OnInit {
   }
 
   placeOrder(side: OrderSide) {
-    this.orderFormFacade.placeOrder({
+    this.orderService.placeOrder({
       clientOrderId: '1',
       price: this.orderForm.get('price')?.value,
       quantity: this.orderForm.get('size')?.value,

@@ -1,10 +1,4 @@
 /**
- * Domain models for chart data
- *
- * These are pure domain types - not tied to any specific chart library
- */
-
-/**
  * Chart initialization options
  */
 export interface ChartOptions {

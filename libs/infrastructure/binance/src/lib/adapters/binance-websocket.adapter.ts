@@ -2,7 +2,7 @@ import { DestroyRef, inject, Injectable } from '@angular/core';
 import { Observable, ReplaySubject, Subject, throwError, timer } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { map, retry, shareReplay, takeUntil, tap } from 'rxjs/operators';
-import { ConnectionEvent, ConnectionStatus, WebSocketPort } from '@exchange-platform/ports';
+import { ConnectionEvent, ConnectionStatus, ExchangeWebsocketPort } from '@exchange-platform/ports';
 import { BINANCE_ENVIRONMENTS, DEFAULT_BINANCE_CONFIG } from '../config/binance.config';
 
 /**
@@ -10,7 +10,7 @@ import { BINANCE_ENVIRONMENTS, DEFAULT_BINANCE_CONFIG } from '../config/binance.
  * Implements WebSocketPort interface
  */
 @Injectable()
-export class BinanceWebSocketAdapter implements WebSocketPort {
+export class BinanceWebSocketAdapter implements ExchangeWebsocketPort {
   private destroyRef = inject(DestroyRef);
 
   private connections = new Map<string, WebSocketSubject<any>>();
@@ -22,7 +22,6 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
   private readonly env = BINANCE_ENVIRONMENTS[this.config.environment];
 
   constructor() {
-    // Cleanup on destroy
     this.destroyRef.onDestroy(() => {
       this.destroy$.next();
       this.destroy$.complete();
@@ -61,14 +60,12 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
   subscribe<T>(channel: string): Observable<T> {
     console.log(`Subscribing to: ${channel}`);
 
-    // Check if already subscribed
     const existing = this.connections.get(channel);
     if (existing) {
       console.log(`  Reusing existing subscription`);
       return existing.asObservable() as Observable<T>;
     }
 
-    // Create new WebSocket connection
     const ws$ = this.createWebSocket<T>(channel);
     this.connections.set(channel, ws$);
 
@@ -195,16 +192,12 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
     });
   }
 
-  /**
-   * Determine if an error is recoverable and worth retrying
-   */
   private isRecoverableError(error: any): boolean {
     if (!error) return false;
 
     const message = error.message || error.toString() || '';
     const lowerMessage = message.toLowerCase();
 
-    // Network-related errors that are worth retrying
     const recoverableErrors = [
       'connection refused',
       'connection reset',
@@ -223,7 +216,6 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
       'econnreset',
     ];
 
-    // Check if error message contains recoverable error patterns
     const isRecoverable = recoverableErrors.some((pattern) =>
       lowerMessage.includes(pattern)
     );
@@ -231,7 +223,6 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
     if (isRecoverable) {
       return true;
     }
-
     // Check for specific HTTP-like status codes in WebSocket errors
     if (error.status) {
       const status = parseInt(error.status);
@@ -244,8 +235,6 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
         return true;
       }
     }
-
-    // Check for WebSocket close codes
     if (error.code) {
       const code = parseInt(error.code);
       // Close codes 1000-1015 are generally recoverable (except 1000 normal closure)
@@ -253,8 +242,6 @@ export class BinanceWebSocketAdapter implements WebSocketPort {
         return true;
       }
     }
-
-    // Default to non-recoverable if we can't determine the error type
     console.warn(`Unknown error type, treating as non-recoverable:`, error);
     return false;
   }

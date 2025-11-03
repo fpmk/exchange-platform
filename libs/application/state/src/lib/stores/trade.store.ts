@@ -22,10 +22,10 @@ export interface OrderFormState {
 
 export interface TradeState {
   orderBook: OrderbookState;
-  orderForm: OrderFormState;
+  orderForm: OrderFormState; // todo, maybe move to local store in order form component
   loading: boolean;
   error: string | null;
-  balance: number; // todo move to separate store
+  balance: number; // todo move to separate page local store
 }
 
 const initialState: TradeState = {

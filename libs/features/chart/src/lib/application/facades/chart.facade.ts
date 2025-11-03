@@ -3,15 +3,6 @@ import { Candle } from '@exchange-platform/market';
 import { ChartRendererPort } from '../../domain/ports/chart-renderer.port';
 import { ChartOptions } from '../../domain/models/chart-data.model';
 
-/**
- * Chart Facade (Feature Orchestrator)
- *
- * Responsibilities:
- * - Coordinates chart rendering through the ChartRendererPort abstraction
- * - Manages chart lifecycle (initialize, update, destroy)
- * - Provides high-level API for chart operations
- * - Decoupled from any specific chart library implementation
- */
 @Injectable()
 export class ChartFacade {
   private readonly chartRenderer = inject(ChartRendererPort);

@@ -32,9 +32,6 @@ export type WidgetType =
   | 'ticker'
   | 'market-watch';
 
-/**
- * Lifecycle hooks для виджетов
- */
 export interface WidgetComponent {
   onInit?(): void;
 

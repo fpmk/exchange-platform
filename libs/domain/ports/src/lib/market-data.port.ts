@@ -6,10 +6,6 @@ import {
   Symbol,
 } from '@exchange-platform/market';
 
-/**
- * Port для рыночных данных
- * Infrastructure слой должен реализовать этот интерфейс
- */
 export abstract class MarketDataPort {
   // REST API
   abstract getCandles(
@@ -25,19 +21,4 @@ export abstract class MarketDataPort {
   abstract getSymbols(): Observable<Symbol[]>;
 
   abstract getSymbol(symbol: string): Observable<Symbol>;
-
-  // WebSocket Streams
-  abstract subscribeToCandleUpdates(
-    symbol: string,
-    interval: CandleInterval
-  ): Observable<Candle>;
-
-  abstract subscribeToOrderBookUpdates(
-    symbol: string,
-    updateSpeed?: '100ms' | '1000ms'
-  ): Observable<OrderBook>;
-
-  abstract subscribeToTickerUpdates(symbol: string): Observable<Symbol>;
-
-  abstract subscribeToAllTickersUpdates(): Observable<Symbol[]>;
 }

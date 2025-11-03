@@ -3,13 +3,6 @@ import { ChartOptions, IndicatorConfig } from '../models/chart-data.model';
 
 /**
  * Port for chart rendering library
- *
- * This abstraction allows swapping chart implementations:
- * - Lightweight Charts (current)
- * - TradingView Charts (alternative)
- * - Custom chart implementation
- *
- * Infrastructure layer provides concrete implementations.
  */
 export abstract class ChartRendererPort {
   /**

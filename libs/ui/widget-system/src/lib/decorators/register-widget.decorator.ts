@@ -3,9 +3,6 @@ import { WidgetMetadata } from '../models/widget-metadata.interface';
 
 const WIDGET_REGISTRY = new Map<string, WidgetMetadata>();
 
-/**
- * Декоратор для регистрации виджетов
- */
 export function RegisterWidget(metadata: Omit<WidgetMetadata, 'component'>) {
   return function <T extends Type<any>>(target: T): T {
     const fullMetadata: WidgetMetadata = {

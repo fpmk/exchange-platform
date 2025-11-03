@@ -10,7 +10,6 @@ import {
   createMockStoragePort,
 } from '@exchange-platform/test-mocks';
 
-// Mock ChartComponent from feature-chart
 jest.mock('@exchange-platform/feature-chart', () => ({
   ChartComponent: Component({ template: '<div>Mocked Chart</div>' })(class {}),
 }));
@@ -53,8 +52,8 @@ describe('ChartWidgetComponent', () => {
   });
 
   it('should create', () => {
-    const chartFacade = component['chartFacade'];
-    const spyOn = jest.spyOn(chartFacade, 'changeCandleInterval');
+    // const chartFacade = component['chartFacade'];
+    // const spyOn = jest.spyOn(chartFacade, 'changeCandleInterval');
     expect(component).toBeTruthy();
   });
 });

@@ -12,10 +12,7 @@ export interface ConnectionEvent {
   error?: string;
 }
 
-/**
- * WebSocket Port - абстракция для любого WebSocket соединения
- */
-export abstract class WebSocketPort {
+export abstract class ExchangeWebsocketPort {
   abstract connect(): Observable<ConnectionEvent>;
 
   abstract disconnect(): void;

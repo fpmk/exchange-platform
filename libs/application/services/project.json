@@ -1,0 +1,21 @@
+{
+  "name": "application-services",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/application/services/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:service", "scope:application"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/application/services/jest.config.ts",
+        "tsConfig": "libs/application/services/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

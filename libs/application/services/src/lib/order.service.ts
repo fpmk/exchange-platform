@@ -1,13 +1,12 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import {
-  PlaceOrderCommand,
-  PlaceOrderUseCase,
-} from '@exchange-platform/trading-use-cases';
+import { PlaceOrderCommand, PlaceOrderUseCase } from '@exchange-platform/trading-use-cases';
 import { TradeStore } from '@exchange-platform/state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-@Injectable()
-export class OrderFormFacade {
+@Injectable({
+  providedIn: 'root'
+})
+export class OrderService {
   private readonly destroyRef = inject(DestroyRef);
   private readonly createOrder = inject(PlaceOrderUseCase);
   private readonly tradeStore = inject(TradeStore);
