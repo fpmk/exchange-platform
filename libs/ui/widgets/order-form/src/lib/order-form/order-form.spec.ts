@@ -9,10 +9,12 @@ import {
   createMockTradeStore,
   createMockTradingPort,
 } from '@exchange-platform/test-mocks';
+import { OrderService } from '@exchange-platform/application-services';
 
 describe('OrderForm', () => {
   let component: OrderForm;
   let fixture: ComponentFixture<OrderForm>;
+  let orderService: OrderService;
   let mockAppStore: any;
   let tradeStore: any;
   let mockTradingPort: any;
@@ -30,6 +32,7 @@ describe('OrderForm', () => {
       imports: [OrderForm],
       providers: [
         FormBuilder,
+        OrderService,
         { provide: AppStore, useValue: mockAppStore },
         { provide: TradeStore, useValue: tradeStore },
         { provide: TradingPort, useValue: mockTradingPort },
@@ -37,6 +40,7 @@ describe('OrderForm', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrderForm);
+    orderService = TestBed.inject(OrderService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -46,8 +50,7 @@ describe('OrderForm', () => {
   });
 
   it('should call placeOrder on facade when placeOrder is triggered', async () => {
-    const orderFormFacade = component['orderFormFacade'];
-    const spy = jest.spyOn(orderFormFacade, 'placeOrder');
+    const spy = jest.spyOn(orderService, 'placeOrder');
     component['orderForm'].setValue({ price: 50000, size: 0.01 });
 
     component.placeOrder('BUY');

@@ -6,5 +6,7 @@ export function createMockAppStore() {
     selectedSymbol: signal('BTCUSDT'),
     theme: signal('dark' as 'dark' | 'light'),
     isInitialized: signal(true),
+    markAsInitialized: jest.fn(),
+    setTheme: jest.fn(),
   };
 }

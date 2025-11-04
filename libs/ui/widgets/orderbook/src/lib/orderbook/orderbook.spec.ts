@@ -2,13 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Orderbook } from './orderbook';
 import { AppStore, ChartStore, TradeStore } from '@exchange-platform/state';
 import { OrderBookFacade } from '../facades/order-book.facade';
-import { MarketDataPort, StoragePort } from '@exchange-platform/ports';
+import { MarketDataPort, StoragePort, WsMarketDataPort } from '@exchange-platform/ports';
 import {
   createMockAppStore,
   createMockChartStore,
   createMockMarketDataPort,
   createMockStoragePort,
-  createMockTradeStore,
+  createMockTradeStore, createMockWsMarketDataPort
 } from '@exchange-platform/test-mocks';
 
 describe('Orderbook', () => {
@@ -51,6 +51,7 @@ describe('Orderbook', () => {
         { provide: OrderBookFacade, useValue: mockOrderBookFacade },
         { provide: StoragePort, useValue: mockStorage },
         { provide: MarketDataPort, useValue: mockMarketDataPort },
+        { provide: WsMarketDataPort, useValue: createMockWsMarketDataPort() },
       ],
     }).compileComponents();
 

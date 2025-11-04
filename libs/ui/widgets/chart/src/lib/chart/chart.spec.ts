@@ -2,12 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, signal } from '@angular/core';
 import { ChartWidgetComponent } from './chart';
 import { AppStore, ChartStore } from '@exchange-platform/state';
-import { MarketDataPort, StoragePort } from '@exchange-platform/ports';
+import { MarketDataPort, StoragePort, WsMarketDataPort } from '@exchange-platform/ports';
 import {
   createMockAppStore,
   createMockChartStore,
   createMockMarketDataPort,
-  createMockStoragePort,
+  createMockStoragePort, createMockWsMarketDataPort
 } from '@exchange-platform/test-mocks';
 
 jest.mock('@exchange-platform/feature-chart', () => ({
@@ -42,6 +42,7 @@ describe('ChartWidgetComponent', () => {
         { provide: AppStore, useValue: mockAppStore },
         { provide: ChartStore, useValue: mockChartStore },
         { provide: MarketDataPort, useValue: mockMarketDataPort },
+        { provide: WsMarketDataPort, useValue: createMockWsMarketDataPort() },
         { provide: StoragePort, useValue: storagePort },
       ],
     }).compileComponents();
