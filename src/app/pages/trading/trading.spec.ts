@@ -1,6 +1,4 @@
-/* eslint-disable @angular-eslint/component-selector */
-
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture } from '@angular/core/testing';
 import {
   createMockAppStore,
   createMockChartStore,
@@ -11,29 +9,14 @@ import {
   createMockTradingPort,
   createMockWsMarketDataPort
 } from '@exchange-platform/test-mocks';
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppStore, ChartStore, ExchangeWebSocketStore } from '@exchange-platform/state';
 import { WebsocketService } from '@exchange-platform/application-services';
 import { ExchangeWebsocketPort, MarketDataPort, StoragePort, TradingPort, WsMarketDataPort } from '@exchange-platform/ports';
 import { TradingPage } from './trading';
-
-jest.mock('@exchange-platform/orderbook', () => ({
-  Orderbook: Component({ selector: 'lib-orderbook-widget', template: '<div>Mocked Chart</div>' })(class {}),
-}));
-
-jest.mock('@exchange-platform/order-form', () => ({
-  OrderForm: Component({ selector: 'lib-order-form', template: '<div>Mocked Chart</div>' })(class {}),
-}));
-
-jest.mock('@exchange-platform/chart', () => ({
-  ChartWidgetComponent: Component({ selector: 'lib-chart-widget', template: '<div>Mocked Chart</div>' })(
-    class {}
-  ),
-}));
-
-jest.mock('@angular/core/rxjs-interop', () => ({
-  takeUntilDestroyed: jest.fn(() => (source: any) => source),
-}));
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { Orderbook } from '@exchange-platform/orderbook';
+import { ChartWidgetComponent } from '@exchange-platform/chart';
+import { OrderForm } from '@exchange-platform/order-form';
 
 const mockWSService = {
   connect: jest.fn(),
@@ -44,52 +27,49 @@ describe('TradingPage', () => {
   let fixture: ComponentFixture<TradingPage>;
   let appStore: any;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     appStore = createMockAppStore();
-    TestBed.configureTestingModule({
-      imports: [TradingPage],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [
-        {
-          provide: AppStore,
-          useValue: appStore,
-        },
-        {
-          provide: ExchangeWebSocketStore,
-          useValue: createMockExchangeWsStore(),
-        },
-        {
-          provide: WebsocketService,
-          useValue: mockWSService,
-        },
-        {
-          provide: ExchangeWebsocketPort,
-          useValue: createMockExchangeWebsocketPort(),
-        },
-        {
-          provide: ChartStore,
-          useValue: createMockChartStore(),
-        },
-        {
-          provide: MarketDataPort,
-          useValue: createMockMarketDataPort(),
-        },
-        {
-          provide: TradingPort,
-          useValue: createMockTradingPort(),
-        },
-        {
-          provide: WsMarketDataPort,
-          useValue: createMockWsMarketDataPort(),
-        },
-        {
-          provide: StoragePort,
-          useValue: createMockStoragePort(),
-        },
-      ],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(TradingPage);
+    await MockBuilder(TradingPage)
+      .mock(Orderbook)
+      .mock(ChartWidgetComponent)
+      .mock(OrderForm)
+      .provide({
+        provide: AppStore,
+        useValue: appStore,
+      })
+      .provide({
+        provide: ExchangeWebSocketStore,
+        useValue: createMockExchangeWsStore(),
+      })
+      .provide({
+        provide: WebsocketService,
+        useValue: mockWSService,
+      })
+      .provide({
+        provide: ExchangeWebsocketPort,
+        useValue: createMockExchangeWebsocketPort(),
+      })
+      .provide({
+        provide: ChartStore,
+        useValue: createMockChartStore(),
+      })
+      .provide({
+        provide: TradingPort,
+        useValue: createMockTradingPort(),
+      })
+      .provide({
+        provide: MarketDataPort,
+        useValue: createMockMarketDataPort(),
+      })
+      .provide({
+        provide: WsMarketDataPort,
+        useValue: createMockWsMarketDataPort(),
+      })
+      .provide({
+        provide: StoragePort,
+        useValue: createMockStoragePort(),
+      });
+    fixture = MockRender(TradingPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
