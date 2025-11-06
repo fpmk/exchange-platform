@@ -1,3 +1,19 @@
-<div class="bg-black min-w-[450px] max-w-[450px] text-white h-full flex flex-col">
-  !!!
+<div class="bg-black min-w-[450px] max-w-[450px] text-white h-full flex flex-col p-4">
+  @if (appStore.connectedAccount()?.address) {
+    <div class="flex justify-between items-center">
+      <button class="bg-gray-600 px-4 p-2 rounded-full">{{ appStore.connectedAccount()?.address | maskAddress }}</button>
+      <div class="text-gray-500 cursor-pointer text-xs" (click)="disconnectWallet()" (keydown)="disconnectWallet()" tabindex="0">Disconnect</div>
+    </div>
+  } @else {
+    @for (prov of (wallets$ | async); track prov.id) {
+      <div class="w-full p-4 cursor-pointer hover:bg-gray-800 flex justify-between items-center" (click)="connectWallet(prov.id)" (keydown)="connectWallet(prov.id)"
+           [tabindex]="$index + 1">
+        <div class="flex items-center">
+          <img [src]="prov.icon | safe: 'resourceUrl'" [alt]="prov.name" width="24" height="24" />
+          <div class="font-bold ml-4">{{ prov.name }}</div>
+        </div>
+        <div class="text-xs text-gray-500">Detected</div>
+      </div>
+    }
+  }
 </div>

@@ -4,7 +4,7 @@
   "sourceRoot": "libs/infrastructure/storage/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["type:infrastructure scope:shared"],
+  "tags": ["type:infrastructure"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

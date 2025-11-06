@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { WalletAddress } from '@exchange-platform/types';
 
 @Pipe({
   name: 'maskAddress',
 })
 export class MaskAddressPipe implements PipeTransform {
-  transform(value: string | null): string {
+  transform(value: WalletAddress): string {
     if (!value) {
       return '';
     }

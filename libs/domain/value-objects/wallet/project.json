@@ -1,0 +1,21 @@
+{
+  "name": "wallet-vo",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/domain/value-objects/wallet/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:domain"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/domain/value-objects/wallet/jest.config.ts",
+        "tsConfig": "libs/domain/value-objects/wallet/tsconfig.spec.json"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

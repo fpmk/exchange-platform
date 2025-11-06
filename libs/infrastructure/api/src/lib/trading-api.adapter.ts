@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class TradingApiAdapter implements TradingPort {
   placeOrder(request: Order): Observable<Order> {
     // make HTTP/WS request to server
-    return of();
+    return of(request);
   }
 
   cancelOrder(request: CancelOrderRequest): Observable<Order> {

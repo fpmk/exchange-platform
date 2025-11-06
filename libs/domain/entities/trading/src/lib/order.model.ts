@@ -18,6 +18,8 @@ export class Order {
   ) {}
 
   validate(): void {
+    if (!this.clientOrderId)  throw new Error('Client is empty');
+    if (!this.symbol)  throw new Error('Symbol is empty');
     if (this.price <= 0) throw new Error('Price must be > 0');
     if (this.quantity < 0.01) throw new Error('Size must be >= 0.01');
   }

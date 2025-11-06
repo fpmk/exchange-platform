@@ -99,7 +99,31 @@
         "libs/ui/wallet-connect-button/src/index.ts"
       ],
       "@exchange-platform/dtos": ["libs/application/dtos/src/index.ts"],
-      "@exchange-platform/types": ["libs/domain/types/src/index.ts"]
+      "@exchange-platform/types": ["libs/domain/types/src/index.ts"],
+      "@exchange-platform/wallet": ["libs/domain/entities/wallet/src/index.ts"],
+      "@exchange-platform/wallet-vo": [
+        "libs/domain/value-objects/wallet/src/index.ts"
+      ],
+      "@exchange-platform/wallet-api": [
+        "libs/infrastructure/wallet/src/index.ts"
+      ],
+      "@exchange-platform/configs": ["libs/infrastructure/config/src/index.ts"],
+      "@exchange-platform/platform": [
+        "libs/infrastructure/platform/src/index.ts"
+      ],
+      "@exchange-platform/wallet-use-cases": [
+        "libs/application/use-cases/wallet/src/index.ts"
+      ],
+      "@exchange-platform/shared-pipes": ["libs/shared/pipes/src/index.ts"],
+      "@exchange-platform/repositories": [
+        "libs/domain/repositories/src/index.ts"
+      ],
+      "@exchange-platform/domain-services": [
+        "libs/domain/services/src/index.ts"
+      ],
+      "@exchange-platform/infra-repositories": [
+        "libs/infrastructure/repositories/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

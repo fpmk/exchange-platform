@@ -2,7 +2,7 @@ import { StoragePort } from '@exchange-platform/ports';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable, of } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LocalStorageAdapter implements StoragePort {
   get<T>(key: string): Observable<T | null> {
     const item = localStorage.getItem(key);
