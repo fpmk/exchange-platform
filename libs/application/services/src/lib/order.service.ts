@@ -1,19 +1,23 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
-import { PlaceOrderCommand, PlaceOrderUseCase } from '@exchange-platform/trading-use-cases';
-import { TradeStore } from '@exchange-platform/state';
+import {
+  PlaceOrderQuery,
+  PlaceOrderUseCase,
+} from '@exchange-platform/trading-use-cases';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
   private readonly destroyRef = inject(DestroyRef);
   private readonly createOrder = inject(PlaceOrderUseCase);
-  private readonly tradeStore = inject(TradeStore);
 
-  placeOrder(command: PlaceOrderCommand): void {
-    this.createOrder.execute(command, this.tradeStore.balance())
+  placeOrder(command: PlaceOrderQuery): void {
+    this.createOrder
+      .execute(command)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        console.log('Order placed successfully.');
+      });
   }
 }

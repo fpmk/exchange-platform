@@ -2,13 +2,14 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { MarketDataPort, ExchangeWebsocketPort } from '@exchange-platform/ports';
-import { Candle, CandleInterval, OrderBook, Symbol } from '@exchange-platform/market';
+import { Candle, OrderBook, Symbol } from '@exchange-platform/market';
 import { BinanceRest24hrTicker, BinanceRestDepth, BinanceRestKline } from '../types/binance-rest.types';
 import { BinanceWsDepthLimitMessage, BinanceWsKlineMessage, BinanceWsTickerMessage } from '../types/binance-ws.types';
 import { CandleMapper } from '../mappers/candle.mapper';
 import { OrderBookMapper } from '../mappers/orderbook.mapper';
 import { SymbolMapper } from '../mappers/symbol.mapper';
 import { BINANCE_ENVIRONMENTS, DEFAULT_BINANCE_CONFIG } from '../config/binance.config';
+import { CandleInterval } from '@exchange-platform/types';
 
 /**
  * Binance implementation of MarketDataPort

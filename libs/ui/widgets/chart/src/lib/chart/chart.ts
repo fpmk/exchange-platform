@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegisterWidget } from '@exchange-platform/widget-system';
-import { Candle, CandleInterval } from '@exchange-platform/market';
+import { CandleInterval } from '@exchange-platform/types';
+import { Candle } from '@exchange-platform/market';
 import { AppStore, ChartStore } from '@exchange-platform/state';
 import { SymbolSelector } from '@exchange-platform/symbol-selector';
 import { ChartFacade } from '../facades/chart.facade';

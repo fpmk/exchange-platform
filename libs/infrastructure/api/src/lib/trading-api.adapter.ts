@@ -1,15 +1,11 @@
-import {
-  CancelOrderRequest,
-  PlaceOrderRequest,
-  TradingPort,
-} from '@exchange-platform/ports';
+import { CancelOrderRequest, TradingPort } from '@exchange-platform/ports';
 import { Order } from '@exchange-platform/trading';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TradingApiAdapter implements TradingPort {
-  placeOrder(request: PlaceOrderRequest): Observable<Order> {
+  placeOrder(request: Order): Observable<Order> {
     // make HTTP/WS request to server
     return of();
   }

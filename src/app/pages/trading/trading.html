@@ -1,37 +1,6 @@
 <div class="trading-page h-screen bg-gray-900 text-white flex flex-col">
-  <!-- Header -->
-  <header
-    class="header h-14 bg-gray-800 px-4 flex items-center justify-between border-b border-gray-700"
-  >
-    <div class="flex items-center gap-6">
-      <h1 class="text-xl font-bold">Exchange Platform</h1>
 
-      <!-- WebSocket Status -->
-      <div class="flex items-center gap-2">
-        <div
-          class="w-2 h-2 rounded-full transition-colors"
-          [class.bg-green-500]="wsStore.isConnected()"
-          [class.bg-yellow-500]="wsStore.isConnecting()"
-          [class.bg-red-500]="
-                !wsStore.isConnected() && !wsStore.isConnecting()
-              "
-        ></div>
-        <span class="text-xs text-gray-400">
-          {{ wsStore.status() }}
-        </span>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <!-- Theme Toggle -->
-      <button
-        (click)="toggleTheme()"
-        class="px-3 py-2 bg-gray-700 rounded hover:bg-gray-600 transition"
-      >
-        {{ appState.theme() === 'dark' ? '🌙' : '☀️' }}
-      </button>
-    </div>
-  </header>
+  <lib-header></lib-header>
 
   <!-- Main Content - Widget Grid -->
   <main class="flex-1 p-2 overflow-hidden">

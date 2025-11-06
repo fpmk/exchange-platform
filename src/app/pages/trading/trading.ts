@@ -5,15 +5,16 @@ import {
   OnInit,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppStore, ExchangeWebSocketStore } from '@exchange-platform/state';
+import { AppStore } from '@exchange-platform/state';
 import { Orderbook } from '@exchange-platform/orderbook';
 import { ChartWidgetComponent } from '@exchange-platform/chart';
 import { OrderForm } from '@exchange-platform/order-form';
 import { WebsocketService } from '@exchange-platform/application-services';
+import { Header } from '@exchange-platform/header';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ChartWidgetComponent, Orderbook, OrderForm],
+  imports: [CommonModule, ChartWidgetComponent, Orderbook, OrderForm, Header],
   selector: 'app-trading',
   templateUrl: './trading.html',
   styleUrl: './trading.scss',
@@ -21,16 +22,10 @@ import { WebsocketService } from '@exchange-platform/application-services';
 })
 export class TradingPage implements OnInit {
   protected readonly appState = inject(AppStore);
-  protected readonly wsStore = inject(ExchangeWebSocketStore);
   private readonly wsService = inject(WebsocketService);
 
   ngOnInit() {
     this.wsService.connect();
     this.appState.markAsInitialized();
-  }
-
-  protected toggleTheme() {
-    const newTheme = this.appState.theme() === 'dark' ? 'light' : 'dark';
-    this.appState.setTheme(newTheme);
   }
 }

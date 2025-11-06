@@ -4,7 +4,7 @@
   "sourceRoot": "libs/ui/widgets/market-watch/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["type:widget scope:market"],
+  "tags": ["type:widget"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

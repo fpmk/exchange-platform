@@ -4,7 +4,7 @@
   "sourceRoot": "libs/ui/widgets/order-form/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["type:widget scope:trading"],
+  "tags": ["type:widget"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

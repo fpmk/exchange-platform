@@ -25,7 +25,7 @@ export interface TradeState {
   orderForm: OrderFormState; // todo, maybe move to local store in order form component
   loading: boolean;
   error: string | null;
-  balance: number; // todo move to separate page local store
+  balance: number; // todo move to separate local store
 }
 
 const initialState: TradeState = {

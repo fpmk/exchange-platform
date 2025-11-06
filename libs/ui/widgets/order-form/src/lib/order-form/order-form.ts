@@ -14,7 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AppStore, TradeStore } from '@exchange-platform/state';
-import { OrderSide } from '@exchange-platform/trading';
+import { OrderSide } from '@exchange-platform/types';
 import { OrderService } from '@exchange-platform/application-services';
 
 @RegisterWidget({

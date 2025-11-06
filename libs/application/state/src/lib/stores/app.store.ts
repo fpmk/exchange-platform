@@ -9,14 +9,18 @@ import {
 } from '@ngrx/signals';
 import { StoragePort } from '@exchange-platform/ports';
 
+export type WalletAddress = string & { __brand: 'WalletAddress' };
+
 export interface AppState {
   selectedSymbol: string;
+  connectedAddress: WalletAddress;
   theme: 'light' | 'dark';
   isInitialized: boolean;
 }
 
 const INITIAL_STATE: AppState = {
   selectedSymbol: 'BTCUSDT',
+  connectedAddress: '' as WalletAddress,
   theme: 'dark',
   isInitialized: false,
 };
@@ -56,6 +60,13 @@ export const AppStore = signalStore(
     },
 
     /**
+     * Set address
+     */
+    setAddress(address: WalletAddress): void {
+      patchState(store, { connectedAddress: address });
+    },
+
+    /**
      * Toggle between light and dark theme
      */
     toggleTheme(): void {
@@ -85,6 +96,7 @@ export const AppStore = signalStore(
       try {
         const state: AppState = {
           selectedSymbol: store.selectedSymbol(),
+          connectedAddress: store.connectedAddress(),
           theme: store.theme(),
           isInitialized: store.isInitialized(),
         };
@@ -138,6 +150,7 @@ export const AppStore = signalStore(
         const selectedSymbol = store.selectedSymbol();
         const theme = store.theme();
         const isInitialized = store.isInitialized();
+        const connectedAddress = store.connectedAddress();
 
         // Save to storage (runs on every state change)
         store.saveToStorage();

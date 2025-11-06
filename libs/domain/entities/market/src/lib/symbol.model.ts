@@ -1,14 +1,16 @@
-export interface Symbol {
-  symbol: string;
-  baseAsset: string;
-  quoteAsset: string;
-  status: SymbolStatus;
-  price: number;
-  priceChange: number;
-  priceChangePercent: number;
-  volume: number;
-  highPrice?: number;
-  lowPrice?: number;
-}
+import { SymbolStatus } from '@exchange-platform/types';
 
-export type SymbolStatus = 'TRADING' | 'BREAK' | 'HALT';
+export class Symbol {
+  constructor(
+    public symbol: string,
+    public baseAsset: string,
+    public quoteAsset: string,
+    public status: SymbolStatus,
+    public price: number,
+    public priceChange: number,
+    public priceChangePercent: number,
+    public volume: number,
+    public highPrice?: number,
+    public lowPrice?: number
+  ) {}
+}

@@ -28,7 +28,9 @@
         "libs/ui/widgets/symbol-selector-widget/src/index.ts"
       ],
       "@exchange-platform/shared-utils": ["libs/shared/utils/src/index.ts"],
-      "@exchange-platform/ports": ["libs/domain/ports/src/index.ts"],
+      "@exchange-platform/ports": [
+        "libs/application/ports/outbound/src/index.ts"
+      ],
       "@exchange-platform/widget-system": [
         "libs/ui/widget-system/src/index.ts"
       ],
@@ -79,7 +81,6 @@
       ],
       "@exchange-platform/constants": ["libs/shared/constants/src/index.ts"],
       "@exchange-platform/mapper": ["libs/infrastructure/mapper/src/index.ts"],
-      "@exchange-platform/types": ["libs/domain/types/src/index.ts"],
       "@exchange-platform/feature-chart": ["libs/features/chart/src/index.ts"],
       "@exchange-platform/api": ["libs/infrastructure/api/src/index.ts"],
       "@exchange-platform/domain-validators": [
@@ -88,7 +89,17 @@
       "@exchange-platform/test-mocks": ["libs/shared/test-mocks/src/index.ts"],
       "@exchange-platform/application-services": [
         "libs/application/services/src/index.ts"
-      ]
+      ],
+      "@exchange-platform/wallet-connect": [
+        "libs/ui/wallet-connect/src/index.ts"
+      ],
+      "@exchange-platform/header": ["libs/ui/header/src/index.ts"],
+      "@exchange-platform/pipes": ["libs/ui/pipes/src/index.ts"],
+      "@exchange-platform/wallet-connect-button": [
+        "libs/ui/wallet-connect-button/src/index.ts"
+      ],
+      "@exchange-platform/dtos": ["libs/application/dtos/src/index.ts"],
+      "@exchange-platform/types": ["libs/domain/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,6 @@
+<button
+  (click)="connectWallet()"
+  class="px-2 py-1 text-xs rounded bg-blue-400 hover:bg-blue-500 transition cursor-pointer"
+>
+  {{ (appStore.connectedAddress() | maskAddress) || 'Connect Wallet' }}
+</button>

@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WsMarketDataPort } from '@exchange-platform/ports';
-import { Candle, CandleInterval } from '@exchange-platform/market';
+import { Candle } from '@exchange-platform/market';
+import { CandleInterval } from '@exchange-platform/types';
 
 export interface SubscribeToCandlesCommand {
   symbol: string;

@@ -6,7 +6,8 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
-import { Candle, CandleInterval } from '@exchange-platform/market';
+import { Candle } from '@exchange-platform/market';
+import { CandleInterval } from '@exchange-platform/types';
 
 export interface ChartState {
   candles: Candle[];

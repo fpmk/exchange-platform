@@ -3,7 +3,7 @@ import {
   GetHistoricalCandlesUseCase,
   SubscribeToCandlesUseCase,
 } from '@exchange-platform/market-use-cases';
-import { CandleInterval } from '@exchange-platform/market';
+import { CandleInterval } from '@exchange-platform/types';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { filter, map, Subscription, take } from 'rxjs';

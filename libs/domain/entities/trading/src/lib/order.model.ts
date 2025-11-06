@@ -1,33 +1,24 @@
-export interface Order {
-  id: string;
-  clientOrderId: string;
-  symbol: string;
-  side: OrderSide;
-  type: OrderType;
-  price: number;
-  quantity: number;
-  executedQty: number;
-  cumulativeQuoteQty: number;
-  status: OrderStatus;
-  timeInForce: TimeInForce;
-  time: number;
-  updateTime: number;
-}
+import { OrderSide, OrderStatus, OrderType, TimeInForce } from '@exchange-platform/types';
 
-export type OrderSide = 'BUY' | 'SELL';
-export type OrderType =
-  | 'LIMIT'
-  | 'MARKET'
-  | 'STOP_LOSS'
-  | 'STOP_LOSS_LIMIT'
-  | 'TAKE_PROFIT'
-  | 'TAKE_PROFIT_LIMIT';
-export type OrderStatus =
-  | 'NEW'
-  | 'PARTIALLY_FILLED'
-  | 'FILLED'
-  | 'CANCELED'
-  | 'PENDING_CANCEL'
-  | 'REJECTED'
-  | 'EXPIRED';
-export type TimeInForce = 'GTC' | 'IOC' | 'FOK';
+export class Order {
+  constructor(
+    public id: string,
+    public clientOrderId: string,
+    public symbol: string,
+    public side: OrderSide,
+    public type: OrderType,
+    public price: number,
+    public quantity: number,
+    public executedQty?: number,
+    public cumulativeQuoteQty?: number,
+    public status?: OrderStatus,
+    public timeInForce?: TimeInForce,
+    public time?: number,
+    public updateTime?: number
+  ) {}
+
+  validate(): void {
+    if (this.price <= 0) throw new Error('Price must be > 0');
+    if (this.quantity < 0.01) throw new Error('Size must be >= 0.01');
+  }
+}

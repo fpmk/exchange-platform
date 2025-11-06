@@ -4,7 +4,7 @@
   "sourceRoot": "libs/ui/widgets/chart/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["type:chart scope:market"],
+  "tags": ["type:widget"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

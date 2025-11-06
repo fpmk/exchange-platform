@@ -53,7 +53,20 @@
               {
                 "sourceTag": "type:widgets",
                 "onlyDependOnLibsWithTags": [
+                  "type:shared",
+                  "type:pipes",
                   "type:core",
+                  "type:application",
+                  "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:widgets",
+                  "type:pipes",
+                  "type:ui",
+                  "type:shared",
                   "type:application",
                   "type:util"
                 ]
@@ -61,7 +74,12 @@
               {
                 "sourceTag": "type:components",
                 "onlyDependOnLibsWithTags": [
+                  "type:shared",
+                  "type:pipes",
+                  "type:components",
                   "type:widgets",
+                  "type:ui",
+                  "type:application",
                   "type:util"
                 ]
               },
@@ -69,6 +87,16 @@
                 "sourceTag": "type:util",
                 "onlyDependOnLibsWithTags": [
                   "type:util"
+                ]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": [
+                  "type:shared",
+                  "type:pipes",
+                  "type:components",
+                  "type:widgets",
+                  "type:ui"
                 ]
               }
             ]
