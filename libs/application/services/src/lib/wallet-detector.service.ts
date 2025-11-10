@@ -1,21 +1,21 @@
 import { inject, Injectable } from '@angular/core';
 import { WINDOW } from '@exchange-platform/platform';
 import {
-  EIP1193Provider,
-  EIP6963AnnounceProviderEvent,
-  EIP6963ProviderDetail,
-  EIP6963ProviderInfo,
+  WalletProvider,
+  AnnounceWalletProviderEvent,
+  WalletProviderDetail,
+  WalletProviderInfo,
   WalletType,
 } from '@exchange-platform/types';
 import { Wallet } from '@exchange-platform/wallet';
-import { WalletRepository } from '@exchange-platform/repositories';
+import { WalletsStoragePort } from '@exchange-platform/ports';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WalletDetectorService {
   private readonly _window = inject(WINDOW);
-  private readonly _walletRepository = inject(WalletRepository);
+  private readonly _walletRepository = inject(WalletsStoragePort);
   private _wallets: Wallet[] = [];
   private _isEIP6963Initialized = false;
 
@@ -40,21 +40,21 @@ export class WalletDetectorService {
     if (this._isEIP6963Initialized) return;
     if (typeof this._window === 'undefined') return;
     this._window.addEventListener('eip6963:announceProvider', (e) =>
-      this.onProviderAnnouncedEvent(e as EIP6963AnnounceProviderEvent)
+      this.onProviderAnnouncedEvent(e as AnnounceWalletProviderEvent)
     );
     this._wallets = [];
     window.dispatchEvent(new Event('eip6963:requestProvider'));
     this._isEIP6963Initialized = true;
   }
 
-  private onProviderAnnouncedEvent(event: EIP6963AnnounceProviderEvent) {
+  private onProviderAnnouncedEvent(event: AnnounceWalletProviderEvent) {
     const wallet = this.createWallet(event.detail);
     if (this._wallets.find((w) => w.id === wallet.id)) return;
     this._wallets.push(wallet);
     this._walletRepository.addWallet(wallet);
   }
 
-  private createWallet(providerDetail: EIP6963ProviderDetail): Wallet {
+  private createWallet(providerDetail: WalletProviderDetail): Wallet {
     const { info, provider } = providerDetail;
 
     const walletType = this.detectWalletType(info);
@@ -63,13 +63,13 @@ export class WalletDetectorService {
       info.name,
       info.icon,
       walletType,
-      provider as EIP1193Provider,
+      provider as WalletProvider,
       false,
       null
     );
   }
 
-  private detectWalletType(info: EIP6963ProviderInfo): WalletType {
+  private detectWalletType(info: WalletProviderInfo): WalletType {
     if (info.rdns && info.rdns.includes('solana')) {
       return WalletType.SOLANA;
     }

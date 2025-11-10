@@ -6,7 +6,7 @@
     </div>
   } @else {
     @for (prov of (wallets$ | async); track prov.id) {
-      <div class="w-full p-4 cursor-pointer hover:bg-gray-800 flex justify-between items-center" (click)="connectWallet(prov.id)" (keydown)="connectWallet(prov.id)"
+      <div class="w-full p-4 cursor-pointer hover:bg-gray-800 flex justify-between items-center" (click)="connectWallet(prov)" (keydown)="connectWallet(prov)"
            [tabindex]="$index + 1">
         <div class="flex items-center">
           <img [src]="prov.icon | safe: 'resourceUrl'" [alt]="prov.name" width="24" height="24" />

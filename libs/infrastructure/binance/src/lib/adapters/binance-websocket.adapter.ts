@@ -33,11 +33,7 @@ export class BinanceWebSocketAdapter implements ExchangeWebsocketPort {
     console.log(
       `Binance WebSocket: Connecting to ${this.config.environment}...`
     );
-
     this.updateStatus('connecting');
-
-    // Binance doesn't have a "global" connection, it connects per stream
-    // We'll simulate successful connection
     setTimeout(() => {
       this.updateStatus('connected');
     }, 100);
@@ -120,8 +116,8 @@ export class BinanceWebSocketAdapter implements ExchangeWebsocketPort {
           this.updateStatus('error', err.message || 'Stream error');
         },
       }),
-      takeUntil(this.destroy$),
-      shareReplay({ bufferSize: 1, refCount: true })
+      shareReplay({ bufferSize: 1, refCount: true }),
+      takeUntil(this.destroy$)
     ) as Observable<T>;
   }
 

@@ -1,7 +1,13 @@
 import { Wallet, WalletAccount } from '@exchange-platform/wallet';
+import { WalletType } from '@exchange-platform/types';
 
 export interface WalletPort {
-  connect(wallet: Wallet, onAccountChange: (acc: WalletAccount) => void): Promise<Wallet>;
+  getWalletType(): WalletType;
+
+  connect(
+    wallet: Wallet,
+    onAccountChange: (acc: WalletAccount) => void
+  ): Promise<Wallet>;
 
   disconnect(wallet: Wallet): Promise<void>;
 

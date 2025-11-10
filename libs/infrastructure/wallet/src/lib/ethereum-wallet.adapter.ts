@@ -1,9 +1,17 @@
 import { Wallet, WalletAccount } from '@exchange-platform/wallet';
-import { ChainId, WalletAddress } from '@exchange-platform/types';
+import { ChainId, WalletAddress, WalletType } from '@exchange-platform/types';
 import { ethers } from 'ethers';
 import { WalletPort } from '@exchange-platform/ports';
+import { Injectable } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 export class EthereumWalletAdapter implements WalletPort {
+  private _eventsInited = false;
+
+  getWalletType(): WalletType {
+    return WalletType.EVM;
+  }
+
   async connect(
     wallet: Wallet,
     onAccountChange: (acc: WalletAccount) => void
@@ -31,19 +39,21 @@ export class EthereumWalletAdapter implements WalletPort {
         chainId: chainId as ChainId,
         balance: balance.toString(),
       };
-      wallet.setConnected(true);
-      wallet.setAccount(account);
-      wallet.provider.on('accountsChanged', (accounts: string[]) => {
-        console.log(`${wallet.name}: Accounts changed`, accounts);
-        const account = {
-          address: accounts[0] as WalletAddress,
-          chainId: chainId as ChainId,
-          balance: balance.toString(),
-        };
-        wallet.setConnected(true);
-        wallet.setAccount(account);
-        onAccountChange(account);
-      });
+      wallet.isConnected = true;
+      wallet.account = account;
+      if (!this._eventsInited) {
+        wallet.provider.on('accountsChanged', (accounts: string[]) => {
+          console.log(`${wallet.name}: Accounts changed`, accounts);
+          const account = {
+            address: accounts[0] as WalletAddress,
+            chainId: chainId as ChainId,
+            balance: balance.toString(),
+          };
+          wallet.account = account;
+          onAccountChange(account);
+        });
+        this._eventsInited = true;
+      }
       return Promise.resolve(wallet);
     } catch (error) {
       throw new Error(
@@ -58,8 +68,8 @@ export class EthereumWalletAdapter implements WalletPort {
         await wallet.provider.disconnect();
       }
 
-      wallet.setConnected(false);
-      wallet.setAccount(null);
+      wallet.isConnected = false;
+      wallet.account = null;
     } catch (error) {
       throw new Error(
         `Failed to disconnect from ${wallet.name}: ${(error as Error).message}`

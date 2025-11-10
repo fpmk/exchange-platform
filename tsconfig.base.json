@@ -114,16 +114,7 @@
       "@exchange-platform/wallet-use-cases": [
         "libs/application/use-cases/wallet/src/index.ts"
       ],
-      "@exchange-platform/shared-pipes": ["libs/shared/pipes/src/index.ts"],
-      "@exchange-platform/repositories": [
-        "libs/domain/repositories/src/index.ts"
-      ],
-      "@exchange-platform/domain-services": [
-        "libs/domain/services/src/index.ts"
-      ],
-      "@exchange-platform/infra-repositories": [
-        "libs/infrastructure/repositories/src/index.ts"
-      ]
+      "@exchange-platform/shared-pipes": ["libs/shared/pipes/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

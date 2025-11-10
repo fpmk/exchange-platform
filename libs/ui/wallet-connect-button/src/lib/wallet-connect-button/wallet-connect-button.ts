@@ -20,8 +20,13 @@ export class WalletConnectButton implements OnInit {
     this._walletConnectFacade
       .recoverLastConnection()
       .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((wallet) => {
-        this.appStore.setAccount(wallet.account);
+      .subscribe({
+        next: wallet => {
+          this.appStore.setAccount(wallet.account);
+        },
+        error: err  => {
+          console.log(err);
+        }
       });
   }
 

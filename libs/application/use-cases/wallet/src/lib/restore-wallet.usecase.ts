@@ -1,15 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable, switchMap } from 'rxjs';
 import { Wallet } from '@exchange-platform/wallet';
-import { WalletStoragePort } from '@exchange-platform/ports';
-import { WalletRepository } from '@exchange-platform/repositories';
 import { fromPromise } from 'rxjs/internal/observable/innerFrom';
 import { AppStore } from '@exchange-platform/state';
+import { WALLET_ADAPTERS } from '@exchange-platform/wallet-api';
+import {
+  WalletsStoragePort,
+  WalletStoragePort,
+} from '@exchange-platform/ports';
 
 @Injectable({ providedIn: 'root' })
 export class RestoreWalletUseCase {
   private readonly _walletStorage = inject(WalletStoragePort);
-  private readonly _walletRepository = inject(WalletRepository);
+  private readonly _walletRepository = inject(WalletsStoragePort);
+  private readonly _walletAdapters = inject(WALLET_ADAPTERS);
   private readonly _appStore = inject(AppStore);
 
   execute(): Observable<Wallet> {
@@ -21,7 +25,11 @@ export class RestoreWalletUseCase {
       }),
       switchMap((value) => {
         if (!value) throw new Error('Wallet not found');
-        return this._walletRepository.connectWallet(value.id, (acc) => {
+        const provider = this._walletAdapters.find(
+          (adapter) => adapter.getWalletType() === value.type
+        );
+        if (!provider) throw new Error('Wallet provider not found');
+        return provider.connect(value, (acc) => {
           this._appStore.setAccount(acc);
         });
       })

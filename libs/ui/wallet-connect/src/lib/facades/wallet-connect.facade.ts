@@ -30,15 +30,15 @@ export class WalletConnectFacade {
       .pipe(tap((wallet) => this.appStore.setAccount(wallet.account)));
   }
 
-  connect(walletId: string): Observable<Wallet> {
-    return fromPromise(this._connectUseCase.execute(walletId)).pipe(
+  connect(wallet: Wallet): Observable<Wallet> {
+    return fromPromise(this._connectUseCase.execute(wallet)).pipe(
       tap((wallet) => this.appStore.setAccount(wallet.account)),
       tap((wallet) => this._walletSore.saveConnectedWallet(wallet))
     );
   }
 
-  disconnect(walletId: string): Observable<void> {
-    return fromPromise(this._disconnectUseCase.execute(walletId)).pipe(
+  disconnect(wallet: Wallet): Observable<void> {
+    return fromPromise(this._disconnectUseCase.execute(wallet)).pipe(
       tap(() => this.appStore.setAccount(null)),
       tap(() => this._walletSore.clearConnectedWallet())
     );

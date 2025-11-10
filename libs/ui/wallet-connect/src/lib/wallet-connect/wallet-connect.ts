@@ -20,7 +20,7 @@ export class WalletConnect implements OnInit {
   protected readonly appStore = inject(AppStore);
   private readonly _facade = inject(WalletConnectFacade);
   private readonly _destroyRef = inject(DestroyRef);
-  private readonly _currentWalletId = signal<string>('');
+  private readonly _currentWallet = signal<Wallet>({} as Wallet);
 
   ngOnInit(): void {
     this.wallets$ = this._facade.availableWallets();
@@ -28,24 +28,24 @@ export class WalletConnect implements OnInit {
       .recoverLastConnection()
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((wallet) => {
-        this._currentWalletId.set(wallet.id);
+        this._currentWallet.set(wallet);
         this.appStore.setAccount(wallet.account);
       });
   }
 
-  connectWallet(walletId: string) {
+  connectWallet(wallet: Wallet) {
     this._facade
-      .connect(walletId)
+      .connect(wallet)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe((wallet) => {
-        this._currentWalletId.set(wallet.id);
+        this._currentWallet.set(wallet);
         this.appStore.setAccount(wallet.account);
       });
   }
 
   disconnectWallet() {
     this._facade
-      .disconnect(this._currentWalletId())
+      .disconnect(this._currentWallet())
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe();
   }

@@ -12,6 +12,7 @@ import {
   MarketDataPort,
   StoragePort,
   TradingPort,
+  WalletsStoragePort,
   WalletStoragePort,
   WsMarketDataPort,
 } from '@exchange-platform/ports';
@@ -27,10 +28,9 @@ import {
 // Feature Providers
 import { CHART_FEATURE_PROVIDERS } from '@exchange-platform/feature-chart';
 import { TradingApiAdapter } from '@exchange-platform/api';
-import { walletRepositoriesConfig } from '@exchange-platform/configs';
-import { WalletRepositoryImpl } from '@exchange-platform/infra-repositories';
-import { WalletRepository } from '@exchange-platform/repositories';
+import { WALLET_ADAPTER_PROVIDERS } from '@exchange-platform/configs';
 import { DetectWalletsUseCase } from '@exchange-platform/wallet-use-cases';
+import { WalletsStorageAdapter } from '../../libs/infrastructure/storage/src/lib/wallets-storage.adapter';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -61,26 +61,19 @@ export const appConfig: ApplicationConfig = {
       useClass: TradingApiAdapter,
     },
     {
-      provide: WalletStoragePort,
-      useClass: WalletStorageAdapter,
+      provide: WalletsStoragePort,
+      useClass: WalletsStorageAdapter,
     },
     {
-      provide: WalletRepository,
-      useClass: WalletRepositoryImpl,
+      provide: WalletStoragePort,
+      useClass: WalletStorageAdapter,
     },
     DetectWalletsUseCase,
     provideAppInitializer(() => {
       const detectWallet = inject(DetectWalletsUseCase);
       return detectWallet.execute();
     }),
-    ...walletRepositoriesConfig,
-    // {
-    //   provide: AccountPort,
-    //   useClass: BinanceAccountAdapter
-    // },
-    // ============================================
-    // FEATURE-SPECIFIC PROVIDERS
-    // ============================================
+    ...WALLET_ADAPTER_PROVIDERS,
     ...CHART_FEATURE_PROVIDERS,
   ],
 };

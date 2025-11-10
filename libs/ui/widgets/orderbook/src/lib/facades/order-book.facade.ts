@@ -24,7 +24,6 @@ export class OrderBookFacade {
     this.getOrderbook
       .execute({ symbol, limit: this.maxOrderBookCount })
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         take(1),
         tapResponse({
           next: (orderBook) => {
@@ -35,7 +34,8 @@ export class OrderBookFacade {
           error: (error: Error) => {
             this.tradeStore.setError(error.message);
           },
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }

@@ -33,7 +33,6 @@ export class ChartFacade {
     this.getHistoricalCandles
       .execute({ symbol, interval, limit: 50000 })
       .pipe(
-        takeUntilDestroyed(this.destroyRef),
         take(1),
         tapResponse({
           next: (candles) => {
@@ -41,7 +40,8 @@ export class ChartFacade {
             this.startRealtimeUpdates(symbol, interval);
           },
           error: (error: Error) => this.store.setError(error.message),
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe();
   }

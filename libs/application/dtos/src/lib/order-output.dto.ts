@@ -1,9 +1,4 @@
-import {
-  OrderSide,
-  OrderStatus,
-  OrderType,
-  TimeInForce,
-} from '@exchange-platform/trading';
+import { OrderSide, OrderStatus, OrderType, TimeInForce } from '@exchange-platform/types';
 
 export interface OrderOutputDto {
   id: string;
