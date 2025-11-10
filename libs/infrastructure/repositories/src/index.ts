@@ -1,1 +1,1 @@
-export * from './lib/infra-repositories/infra-repositories';
+export * from './lib/wallet.repository.impl';

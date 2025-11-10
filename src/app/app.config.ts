@@ -28,7 +28,7 @@ import {
 import { CHART_FEATURE_PROVIDERS } from '@exchange-platform/feature-chart';
 import { TradingApiAdapter } from '@exchange-platform/api';
 import { walletRepositoriesConfig } from '@exchange-platform/configs';
-import { WalletRepositoryImpl } from '../../libs/infrastructure/repositories/src/lib/wallet.repository.impl';
+import { WalletRepositoryImpl } from '@exchange-platform/infra-repositories';
 import { WalletRepository } from '@exchange-platform/repositories';
 import { DetectWalletsUseCase } from '@exchange-platform/wallet-use-cases';
 
