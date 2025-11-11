@@ -1,4 +1,4 @@
-import { Balance } from '@exchange-platform/account';
+import { Balance } from './balance.model';
 
 export class Account {
   constructor(
