@@ -22,15 +22,15 @@ import {
 } from '@exchange-platform/binance';
 import {
   LocalStorageAdapter,
+  WalletsStorageAdapter,
   WalletStorageAdapter,
 } from '@exchange-platform/storage';
 
 // Feature Providers
 import { CHART_FEATURE_PROVIDERS } from '@exchange-platform/feature-chart';
-import { TradingApiAdapter } from '@exchange-platform/api';
 import { WALLET_ADAPTER_PROVIDERS } from '@exchange-platform/configs';
+import { TradingApiAdapter } from '@exchange-platform/api';
 import { DetectWalletsUseCase } from '@exchange-platform/wallet-use-cases';
-import { WalletsStorageAdapter } from '../../libs/infrastructure/storage/src/lib/wallets-storage.adapter';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { WalletButtonConnectFacade } from './wallet-button-connect.facade';
-import { MockBuilder } from 'ng-mocks';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { WalletConnect } from '@exchange-platform/wallet-connect';
+import { RestoreWalletUseCase } from '@exchange-platform/wallet-use-cases';
 
 describe('WalletButtonConnectFacade', () => {
   let service: WalletButtonConnectFacade;
@@ -31,9 +31,29 @@ describe('WalletButtonConnectFacade', () => {
         block: jest.fn(),
       },
     } as unknown as jest.Mocked<Overlay>;
-    await MockBuilder(WalletButtonConnectFacade)
-      .provide(WalletButtonConnectFacade)
-      .mock(Overlay, overlayMock);
+    
+    TestBed.configureTestingModule({
+      providers: [
+        WalletButtonConnectFacade,
+        {
+          provide: Overlay,
+          useValue: overlayMock,
+        },
+        {
+          provide: RestoreWalletUseCase,
+          useValue: {
+            execute: jest.fn().mockReturnValue(of({})),
+          },
+        },
+      ],
+    });
+    // await MockBuilder(WalletButtonConnectFacade)
+    //   .provide(WalletButtonConnectFacade)
+    //   .provide(RestoreWalletUseCase)
+    //   .mock(RestoreWalletUseCase, {
+    //     execute: jest.fn().mockReturnValue(of({})),
+    //   })
+    //   .mock(Overlay, overlayMock);
     service = TestBed.inject(WalletButtonConnectFacade);
     overlay = TestBed.inject(Overlay);
   });

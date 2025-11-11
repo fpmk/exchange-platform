@@ -69,3 +69,28 @@
 //     );
 //   });
 // });
+
+import { TestBed } from '@angular/core/testing';
+import { WalletDetectorService } from './wallet-detector.service';
+import { WalletsStoragePort } from '@exchange-platform/ports';
+import { createMockWalletsStoragePort } from '@exchange-platform/test-mocks';
+
+describe('WalletDetectorService', () => {
+  let service: WalletDetectorService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: WalletsStoragePort,
+          useValue: createMockWalletsStoragePort(),
+        },
+      ],
+    });
+    service = TestBed.inject(WalletDetectorService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

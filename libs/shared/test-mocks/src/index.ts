@@ -11,5 +11,7 @@ export * from './lib/ports/exchange-websocket-port.mock';
 
 export * from './lib/ports/storage-port.mock';
 export * from './lib/ports/trading-port.mock';
+export * from './lib/ports/wallets-storage-port.mock';
+export * from './lib/ports/wallet-storage-port.mock';
 
 export * from './lib/services/ws-service.mock';
